@@ -1,0 +1,19 @@
+{% import "_includes/forms" as forms %}
+
+<div>
+    {% if assetSources %}
+        {{ forms.checkboxSelectField({
+            label: "Asset Sources"|t,
+            instructions: "Which sources do you want to select assets from?"|t,
+            id: 'assetSources',
+            name: 'assetSources',
+            options: assetSources,
+            values: settings.assetSources
+        })}}
+    {% else %}
+        {{ forms.field({
+            label: "Asset Sources"|t,
+        }, '<p class="error">' ~ "No asset sources exist yet."|t ~ '</p>') }}
+    {% endif %}
+
+</div>
