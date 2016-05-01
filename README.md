@@ -10,20 +10,31 @@ To install Recipe, follow these steps:
 
 1. Download & unzip the file and place the `recipe` directory into your `craft/plugins` directory
 2.  -OR- do a `git clone https://github.com/nystudio107/recipe.git` directly into your `craft/plugins` folder.  You can then update it with `git pull`
-3. Install plugin in the Craft Control Panel under Settings > Plugins
-4. The plugin folder should be named `recipe` for Craft to see it.  GitHub recently started appending `-master` (the branch name) to the name of the folder for zip file downloads.
+3.  -OR- install with Composer via `composer require nystudio107/recipe`
+4. Install plugin in the Craft Control Panel under Settings > Plugins
+5. The plugin folder should be named `recipe` for Craft to see it.  GitHub recently started appending `-master` (the branch name) to the name of the folder for zip file downloads.
 
 Recipe works on Craft 2.4.x, Craft 2.5.x, and Craft 2.6.x.
 
 ## Recipe Overview
 
--Insert text here-
+Recipe adds a 'Recipe' FieldType for Craft CMS that you can add to any of your Sections.
+
+In encapsulates everything you need for a recipe, including the ingredients, a photo of the recipe, directions, cooking time, ratings, and even nutritional information. It handles converting between Imperial and Metric units, outputs 'pretty' fractions for Imperial units, and can output correct ingredient portions for any number of servings.
+
+Recipe also generates the [JSON-LD microdata](https://developers.google.com/structured-data/) for your recipes if you have the [SEOmatic plugin](https://github.com/nystudio107/seomatic) installed, which allows it to be displayed in the [Google knowledge panel](https://developers.google.com/structured-data/rich-snippets/recipes) for search results.
+
+We hope Recipe makes it easier for you to create and share some yummy recipes!
 
 ## Configuring Recipe
 
--Insert text here-
+Create a Recipe field via **Settings->Fields** and you can set the Asset Sources that are used for the recipe images
 
 ## Using Recipe
+
+Once you have created the Recipe field, add it to your Section Entry Types, and fill in what recipe information is appropriate.  Nothing other than the name is required, so feel free to leave anything blank that you're not using.
+
+## Using Recipe in your Templates
 
 To display information about a recipe in your templates, you just use familiar Twig code.  Let's assume the field handle for your Recipe field is `someRecipe`; this is what you'd use to output information about it:
 
@@ -33,7 +44,7 @@ To display information about a recipe in your templates, you just use familiar T
 * `{{ entry.someRecipe.getImageUrl() }}` - a URL to the image for the recipe
 * `{{ entry.someRecipe.prepTime }}` - the prep time for the recipe in minutes
 * `{{ entry.someRecipe.cookTime }}` - the cooking time for the recipe in minutes
-* `{{ entry.someRecipe.prepTime }}` - the total time for the recipe in minutes
+* `{{ entry.someRecipe.totalTime }}` - the total time for the recipe in minutes
 
 For a list of ingredients, do the following (adding whatever output markup you want):
 
@@ -87,7 +98,7 @@ To output the nutritional information for the recipe, do the following:
 
 Some things to do, and ideas for potential features:
 
-* Release it
+* Provide a front-end way to add ratings
 
 ## Recipe Changelog
 

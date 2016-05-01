@@ -1,0 +1,8 @@
+{
+    "name": "nystudio107/recipe",
+    "description": "A recipe FieldType for Craft CMS that includes microdata support",
+    "require": {
+        "composer/installers": "~1.0"
+    },
+    "type": "craft-plugin"
+}

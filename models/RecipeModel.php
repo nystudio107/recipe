@@ -73,6 +73,7 @@ class RecipeModel extends BaseModel
         $result = array();
         foreach ($this->ingredients as $row)
         {
+            $convertedUnits = "";
             $ingredient = "";
             if ($row['quantity'])
             {
@@ -83,25 +84,93 @@ class RecipeModel extends BaseModel
                 if ($serving > 0)
                     $multiplier = $serving / $this->serves;
                 $quantity = $row['quantity'] * $multiplier;
+                $originalQuantity = $quantity;
 
 /* -- Do the units conversion */
+
+                if ($outputUnits == 'imperial')
+                {
+                    if ($row['units'] == "mls")
+                    {
+                        $convertedUnits = "tsps";
+                        $quantity = $quantity * 0.2;
+                    }
+
+                    if ($row['units'] == "ls")
+                    {
+                        $convertedUnits = "cups";
+                        $quantity = $quantity * 4.2;
+                    }
+
+                    if ($row['units'] == "mgs")
+                    {
+                        $convertedUnits = "ozs";
+                        $quantity = $quantity * 0.000035274;
+                    }
+
+                    if ($row['units'] == "gs")
+                    {
+                        $convertedUnits = "ozs";
+                        $quantity = $quantity * 0.035274;
+                    }
+                }
+
+                if ($outputUnits == 'metric')
+                {
+                    if ($row['units'] == "tsps")
+                    {
+                        $convertedUnits = "mls";
+                        $quantity = $quantity * 4.929;
+                    }
+
+                    if ($row['units'] == "tbsps")
+                    {
+                        $convertedUnits = "mls";
+                        $quantity = $quantity * 14.787;
+                    }
+
+                    if ($row['units'] == "flozs")
+                    {
+                        $convertedUnits = "mls";
+                        $quantity = $quantity * 29.574;
+                    }
+
+                    if ($row['units'] == "cups")
+                    {
+                        $convertedUnits = "ls";
+                        $quantity = $quantity * 0.236588;
+                    }
+
+                    if ($row['units'] == "ozs")
+                    {
+                        $convertedUnits = "gs";
+                        $quantity = $quantity * 28.3495;
+                    }
+
+                    $quantity = round($quantity, 1);
+                }
 
 /* -- Convert imperial units to nice fractions */
 
                 if ($outputUnits == 'imperial')
-                    $quanity = $this->convertToFractions($quanity);
+                    $quantity = $this->convertToFractions($quantity);
                 $ingredient .= $quantity;
             }
             if ($row['units'])
             {
                 $units = $row['units'];
-                if ($quantity == 1)
-                    rtrim($units, 's');
+                if ($convertedUnits)
+                    $units = $convertedUnits;
+                if ($originalQuantity <= 1)
+                {
+                    $units = rtrim($units);
+                    $units = rtrim($units, 's');
+                }
                 $ingredient .= " " . $units;
             }
             if ($row['ingredient'])
                 $ingredient .= " " . $row['ingredient'];
-            array_push($result, $ingredient);
+            array_push($result, TemplateHelper::getRaw($ingredient));
         }
         return $result;
     }
@@ -115,7 +184,7 @@ class RecipeModel extends BaseModel
         foreach ($this->directions as $row)
         {
             $direction = $row['direction'];
-            array_push($result, $direction);
+            array_push($result, TemplateHelper::getRaw($direction));
         }
         return $result;
     }
@@ -127,19 +196,73 @@ class RecipeModel extends BaseModel
     {
         $result = 0;
         $total = 0;
-        foreach ($this->ratings as $row)
+        if (isset($this->ratings) && !empty($this->ratings))
         {
-            $result += $row['rating'];
-            $total++;
+            foreach ($this->ratings as $row)
+            {
+                $result += $row['rating'];
+                $total++;
+            }
+            $result = $result / $total;
         }
-        $result = $result / $total;
+        else
+            $result = "";
         return $result;
     }
 
-    private function convertToFractions($quanity)
+    /**
+     * @return string the fractionalized string
+     */
+    private function convertToFractions($quantity)
     {
         $result = "";
+        $whole = floor($quantity);
+        $fraction = $quantity - $whole;
+        switch ($fraction)
+        {
+            case 0:
+                $fraction = "";
+            break;
 
+            case 0.25:
+                $fraction = " &frac14;";
+            break;
+
+            case 0.5:
+                $fraction = " &frac12;";
+            break;
+
+            case 0.75:
+                $fraction = " &frac34;";
+            break;
+
+            case 0.125:
+                $fraction = " &#x215B;";
+            break;
+
+            case 0.375:
+                $fraction = " &#x215C;";
+            break;
+
+            case 0.625:
+                $fraction = " &#x215D;";
+            break;
+
+            case 0.875:
+                $fraction = " &#x215E;";
+            break;
+
+            default:
+                $precision = 5;
+                $pnum = round($fraction, $precision);
+                $denominator = pow(10, $precision);
+                $numerator = $pnum * $denominator;
+                $fraction = "<sup>" . $numerator . "</sup>&frasl;<sub>" . $denominator . "</sub>";
+            break;
+        }
+        if ($whole == 0)
+            $whole = "";
+        $result = $whole . $fraction;
         return $result;
     }
 }
