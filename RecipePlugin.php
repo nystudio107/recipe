@@ -35,7 +35,7 @@ class RecipePlugin extends BasePlugin
      */
     public function getDescription()
     {
-        return Craft::t('A recipe fieldtype');
+        return Craft::t('A recipe FieldType for Craft CMS that includes microdata support');
     }
 
     /**
@@ -104,6 +104,10 @@ class RecipePlugin extends BasePlugin
      */
     public function onAfterInstall()
     {
+
+/* -- Show our "Welcome to Recipe" message */
+
+        craft()->request->redirect(UrlHelper::getCpUrl('recipe/welcome'));
     }
 
     /**

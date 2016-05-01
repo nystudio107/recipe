@@ -108,15 +108,15 @@
                     width: '20%',
                     options: {
                         "": "",
-                        "tsp": "teaspoons" |t,
-                        "tbsp": "tablespoons" |t,
-                        "floz": "fluid ounces" |t,
-                        "cup": "cups" |t,
-                        "oz": "ounces" |t,
-                        "ml": "milliliters" |t,
-                        "l": "liters" |t,
-                        "mg": "milligram" |t,
-                        "g": "gram" |t,
+                        "tsps": "teaspoons" |t,
+                        "tbsps": "tablespoons" |t,
+                        "flozs": "fluid ounces" |t,
+                        "cups": "cups" |t,
+                        "ozs": "ounces" |t,
+                        "mls": "milliliters" |t,
+                        "ls": "liters" |t,
+                        "mgs": "milligram" |t,
+                        "gs": "gram" |t,
                     }
                 },
                 ingredient: {
@@ -171,6 +171,20 @@
             instructions: 'The number of minutes it takes to cook this recipe' |t,
             value: values.cookTime,
             errors: values.getErrors('cookTime'),
+            required: false,
+            locale: field.translatable ? locale,
+        }) }}
+
+        {{ forms.textField({
+            id: id ~ 'totalTime',
+            type: 'number',
+            class: 'nicetext',
+            size: 3,
+            name: name ~ '[totalTime]',
+            label: 'Recipe Total Time' |t,
+            instructions: 'The number of minutes it takes for this entire recipe' |t,
+            value: values.totalTime,
+            errors: values.getErrors('totalTime'),
             required: false,
             locale: field.translatable ? locale,
         }) }}
