@@ -66,7 +66,7 @@ class RecipeFieldType extends BaseFieldType
         $variables = array(
             'id' => $id,
             'name' => $name,
-            'namespaceId' => $namespacedId,
+            'prefix' => craft()->templates->namespaceInputId(""),
             'element' => $this->element,
             'field' => $this->model,
             'values' => $value

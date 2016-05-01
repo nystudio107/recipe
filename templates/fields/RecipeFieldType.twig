@@ -21,9 +21,9 @@
 <div class="pane">
     <nav id="{{ id ~ "tabs" }}" class="tabs">
         <ul>
-            <li><a id="{{ id ~ "tabs-recipe" }}" class="tab sel" href="#{{ "fields-" ~ id ~ 'tab-recipe' }}"  tabindex="0"><img class="recipe-icon" src="{{ resourceUrl('recipe/icon.svg') }}" width="16px" height="auto" /> Recipe</a></li>
-            <li><a id="{{ id ~ "tabs-ratings" }}" class="tab" href="#{{ "fields-" ~ id ~ 'tab-ratings' }}" tabindex="0"><img class="recipe-icon" src="{{ resourceUrl('recipe/star.svg') }}" width="16px" height="auto" /> Ratings</a></li>
-            <li><a id="{{ id ~ "tabs-health" }}" class="tab" href="#{{ "fields-" ~ id ~ 'tab-health' }}" tabindex="0"><img class="recipe-icon" src="{{ resourceUrl('recipe/healthy.svg') }}" width="16px" height="auto" /> Nutrition</a></li>
+            <li><a id="{{ id ~ "tabs-recipe" }}" class="tab sel" href="#{{ prefix ~ id ~ 'tab-recipe' }}"  tabindex="0"><img class="recipe-icon" src="{{ resourceUrl('recipe/icon.svg') }}" width="16px" height="auto" /> Recipe</a></li>
+            <li><a id="{{ id ~ "tabs-ratings" }}" class="tab" href="#{{ prefix ~ id ~ 'tab-ratings' }}" tabindex="0"><img class="recipe-icon" src="{{ resourceUrl('recipe/star.svg') }}" width="16px" height="auto" /> Ratings</a></li>
+            <li><a id="{{ id ~ "tabs-health" }}" class="tab" href="#{{ prefix ~ id ~ 'tab-health' }}" tabindex="0"><img class="recipe-icon" src="{{ resourceUrl('recipe/healthy.svg') }}" width="16px" height="auto" /> Nutrition</a></li>
         </ul>
     </nav>
     <div id="{{ id ~ "tab-recipe" }}">
