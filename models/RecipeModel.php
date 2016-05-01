@@ -211,6 +211,93 @@ class RecipeModel extends BaseModel
     }
 
     /**
+     * @return string the number of ratings
+     */
+    public function getRatingsCount()
+    {
+        $total = 0;
+        if (isset($this->ratings) && !empty($this->ratings))
+        {
+            foreach ($this->ratings as $row)
+            {
+                $total++;
+            }
+        }
+        return $total;
+    }
+
+    /**
+     * @return string the rendered HTML JSON-LD microdata
+     */
+    public function renderRecipeJSONLD()
+    {
+        if (craft()->plugins->getPlugin('Seomatic'))
+        {
+            $metaVars = craft()->seomatic->getGlobals("", craft()->language);
+            $recipeJSONLD = array(
+                "type" => "Recipe",
+                "name" => $this->name,
+                "image" => $this->getImageUrl(),
+                "description" => $this->description,
+                "recipeYield" => $this->serves,
+                "recipeIngredient" => $this->getIngredients(),
+                "recipeInstructions" => $this->getDirections(),
+                );
+            $recipeJSONLD = array_filter($recipeJSONLD);
+
+            $nutrition = array(
+                "type"                  => "NutritionInformation",
+                'servingSize'           => $this->servingSize,
+                'calories'              => $this->calories,
+                'carbohydrateContent'   => $this->carbohydrateContent,
+                'cholesterolContent'    => $this->cholesterolContent,
+                'fatContent'            => $this->fatContent,
+                'fiberContent'          => $this->fiberContent,
+                'proteinContent'        => $this->proteinContent,
+                'saturatedFatContent'   => $this->saturatedFatContent,
+                'sodiumContent'         => $this->sodiumContent,
+                'sugarContent'          => $this->sugarContent,
+                'transFatContent'       => $this->transFatContent,
+                'unsaturatedFatContent' => $this->unsaturatedFatContent,
+            );
+            $nutrition = array_filter($nutrition);
+            $recipeJSONLD['nutrition'] = $nutrition;
+            if (count($recipeJSONLD['nutrition']) == 1)
+                unset($recipeJSONLD['nutrition']);
+
+            $rating = $this->getAggregateRating();
+            if ($rating)
+            {
+                $ratings = array(
+                    "type"          => "AggregateRating",
+                    'ratingCount'   => $this->getRatingsCount(),
+                    'bestRating'    => '5',
+                    'worstRating'   => '1',
+                    'ratingValue'   => $rating,
+                );
+                $ratings = array_filter($ratings);
+                $recipeJSONLD['aggregateRating'] = $ratings;
+            }
+
+            if ($this->prepTime)
+                $recipeJSONLD['prepTime'] = "PT" . $this->prepTime . "M";
+            if ($this->cookTime)
+                $recipeJSONLD['cookTime'] = "PT" . $this->cookTime . "M";
+            if ($this->totalTime)
+                $recipeJSONLD['totalTime'] = "PT" . $this->totalTime . "M";
+
+            $recipeJSONLD['author'] = $metaVars['seomaticIdentity'];
+
+            craft()->seomatic->sanitizeArray($recipeJSONLD);
+            $result = craft()->seomatic->renderJSONLD($recipeJSONLD, false);
+        }
+        else
+            $result = "<!-- SEOmatic plugin must be installed to render the JSON-LD microdata -->";
+
+        return TemplateHelper::getRaw($result);
+    }
+
+    /**
      * @return string the fractionalized string
      */
     private function convertToFractions($quantity)
@@ -265,4 +352,5 @@ class RecipeModel extends BaseModel
         $result = $whole . $fraction;
         return $result;
     }
+
 }

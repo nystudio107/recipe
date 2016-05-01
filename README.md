@@ -92,7 +92,13 @@ To output the nutritional information for the recipe, do the following:
 * `{{ entry.someRecipe.transFatContent }}` - The number of grams of trans fat per serving
 * `{{ entry.someRecipe.unsaturatedFatContent }}` - The number of grams of unsaturated fat per serving
 
+## Rendering Recipe JSON-LD Microdata
 
+If you have the [SEOmatic plugin](https://github.com/nystudio107/seomatic) installed, Recipe can render JSON-LD microdata for you, which allows it to be displayed in the [Google knowledge panel](https://developers.google.com/structured-data/rich-snippets/recipes) for search results:
+
+	{{ entry.someRecipe.renderRecipeJSONLD() }}
+
+![Screenshot](resources/screenshots/recipe02.png)
 
 ## Recipe Roadmap
 
