@@ -120,7 +120,7 @@ Some things to do, and ideas for potential features:
 
 ## Recipe Changelog
 
-### 1.0.0 -- 2016.04.28
+### 1.0.0 -- 2016.05.01
 
 * Initial release
 

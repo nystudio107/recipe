@@ -1,6 +1,6 @@
 {
     "name": "nystudio107/recipe",
-    "description": "A recipe FieldType for Craft CMS that includes microdata support",
+    "description": "A comprehensive recipe FieldType for Craft CMS that includes metric/imperial conversion, portion calculation, and JSON-LD microdata support",
     "require": {
         "composer/installers": "~1.0"
     },

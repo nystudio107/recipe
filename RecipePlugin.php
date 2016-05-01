@@ -35,7 +35,7 @@ class RecipePlugin extends BasePlugin
      */
     public function getDescription()
     {
-        return Craft::t('A recipe FieldType for Craft CMS that includes microdata support');
+        return Craft::t('A comprehensive recipe FieldType for Craft CMS that includes metric/imperial conversion, portion calculation, and JSON-LD microdata support');
     }
 
     /**
