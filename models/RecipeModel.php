@@ -265,18 +265,38 @@ class RecipeModel extends BaseModel
             if (count($recipeJSONLD['nutrition']) == 1)
                 unset($recipeJSONLD['nutrition']);
 
-            $rating = $this->getAggregateRating();
-            if ($rating)
+            $aggregateRating = $this->getAggregateRating();
+            if ($aggregateRating)
             {
-                $ratings = array(
+                $aggregateRatings = array(
                     "type"          => "AggregateRating",
                     'ratingCount'   => $this->getRatingsCount(),
                     'bestRating'    => '5',
                     'worstRating'   => '1',
-                    'ratingValue'   => $rating,
+                    'ratingValue'   => $aggregateRating,
                 );
-                $ratings = array_filter($ratings);
-                $recipeJSONLD['aggregateRating'] = $ratings;
+                $aggregateRatings = array_filter($aggregateRatings);
+                $recipeJSONLD['aggregateRating'] = $aggregateRatings;
+
+                $reviews = array();
+                foreach ($this->ratings as $rating)
+                {
+                    $review = array(
+                        "type"          => "Review",
+                        'author'        => $rating['author'],
+                        'name'          => $this->name . Craft::t(" Review"),
+                        'description'   => $rating['review'],
+                        'reviewRating'  => array(
+                            "type"          => "Rating",
+                            'bestRating'    => '5',
+                            'worstRating'   => '1',
+                            'ratingValue'   => $rating['rating'],
+                            ),
+                        );
+                array_push($reviews, $review);
+                }
+                $reviews = array_filter($reviews);
+                $recipeJSONLD['review'] = $reviews;
             }
 
             if ($this->prepTime)

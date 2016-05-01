@@ -38,6 +38,8 @@ Once you have created the Recipe field, add it to your Section Entry Types, and 
 
 To display information about a recipe in your templates, you just use familiar Twig code.  Let's assume the field handle for your Recipe field is `someRecipe`; this is what you'd use to output information about it:
 
+### Basic Info
+
 * `{{ entry.someRecipe.name }}` - the name of the recipe
 * `{{ entry.someRecipe.description }}` - the description of the recipe
 * `{{ entry.someRecipe.serves }}` - how many people the recipe serves
@@ -46,6 +48,8 @@ To display information about a recipe in your templates, you just use familiar T
 * `{{ entry.someRecipe.cookTime }}` - the cooking time for the recipe in minutes
 * `{{ entry.someRecipe.totalTime }}` - the total time for the recipe in minutes
 
+### Ingredients
+
 For a list of ingredients, do the following (adding whatever output markup you want):
 
     {% set ingredients = entry.someRecipe.getIngredients('imperial', 1) %}
@@ -53,7 +57,9 @@ For a list of ingredients, do the following (adding whatever output markup you w
         {{ ingredient }}
     {% endfor %}
 
-The first parameter is the units you'd like to use (`'imperial'` or `'metric'`).  The second parameter is how many people you'd like the recipe portions to be sized for.  If you leave out the second parameter, it'll just use the recipe default.
+The first parameter is the units you'd like to use (`'imperial'` or `'metric'`).  The second parameter is how many people you'd like the recipe portions to be sized for.  By default, it will use `'imperial'` and the serving size in the recipe if you don't pass these parameters in, e.g.: `entry.someRecipe.getIngredients()`
+
+### Directions
 
 For a list of directions, do the following (adding whatever output markup you want):
 
@@ -62,20 +68,20 @@ For a list of directions, do the following (adding whatever output markup you wa
         {{ direction }}
     {% endfor %}
 
-If you need to do any further manipulation of the Recipe Image (perhaps a transform) you can get the Asset ID for it:
-
-* `{{ entry.someRecipe.imageId }}` - the Asset ID of the image for the recipe
+### Ratings
 
 For a list of the ratings, do the following (adding whatever output markup you want):
 
     {% set ratings = entry.someRecipe.ratings %}
     {% for rating in ratings %}
-        {{ rating.rating }} {{ rating.review }}
+        {{ rating.rating }} {{ rating.review }} {{ rating.author }}
     {% endfor %}
 
 For the aggregate (average) rating for this recipe, do the following (adding whatever output markup you want):
 
     {{ entry.someRecipe.getAggregateRating() }}
+
+### Nutritional Information 
 
 To output the nutritional information for the recipe, do the following:
 
@@ -91,6 +97,12 @@ To output the nutritional information for the recipe, do the following:
 * `{{ entry.someRecipe.sugarContent }}` - The number of grams of sugar per serving
 * `{{ entry.someRecipe.transFatContent }}` - The number of grams of trans fat per serving
 * `{{ entry.someRecipe.unsaturatedFatContent }}` - The number of grams of unsaturated fat per serving
+
+### Image Asset ID
+
+If you need to do any further manipulation of the Recipe Image (perhaps a transform) you can get the Asset ID for it:
+
+* `{{ entry.someRecipe.imageId }}` - the Asset ID of the image for the recipe
 
 ## Rendering Recipe JSON-LD Microdata
 
