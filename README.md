@@ -42,6 +42,7 @@ To display information about a recipe in your templates, you just use familiar T
 
 * `{{ entry.someRecipe.name }}` - the name of the recipe
 * `{{ entry.someRecipe.description }}` - the description of the recipe
+* `{{ entry.someRecipe.skill }}` - the skill level required to make this recipe
 * `{{ entry.someRecipe.serves }}` - how many people the recipe serves
 * `{{ entry.someRecipe.getImageUrl() }}` - a URL to the image for the recipe
 * `{{ entry.someRecipe.prepTime }}` - the prep time for the recipe in minutes
@@ -119,6 +120,12 @@ Some things to do, and ideas for potential features:
 * Provide a front-end way to add ratings
 
 ## Recipe Changelog
+
+### 1.0.1 -- 2016.05.01
+
+* [Fixed] Fixed a minor issue with Recipe if it was embedded in a Matrix field
+* [Added] Added the 'Skill Level' field
+* [Improved] Updated the README.md
 
 ### 1.0.0 -- 2016.05.01
 

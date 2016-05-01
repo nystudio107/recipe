@@ -23,6 +23,7 @@ class RecipeModel extends BaseModel
         return array_merge(parent::defineAttributes(), array(
             'name'                  => array(AttributeType::String, 'default' => ''),
             'description'           => array(AttributeType::String, 'default' => ''),
+            'skill'                 => array(AttributeType::String, 'default' => 'intermediate'),
             'serves'                => array(AttributeType::Number, 'default' => 1),
             'ingredients'           => array(AttributeType::Mixed, 'default' => ''),
             'directions'            => array(AttributeType::Mixed, 'default' => ''),

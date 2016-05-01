@@ -51,6 +51,20 @@
             locale: field.translatable ? locale,
         }) }}
 
+        {{ forms.selectField({
+            id: id ~ "skill",
+            name: name ~ "[skill]",
+            label: 'Recipe Skill' |t,
+            instructions: 'The skill level required to make this recipe' |t,
+            options: {
+                "beginner": "Beginner"|t,
+                "intermediate": "Intermediate"|t,
+                "advanced": "Advanced"|t,
+            },
+            value: values.skill,
+            locale: field.translatable ? locale,
+        }) }}
+
         {{ forms.textField({
             id: id ~ 'serves',
             type: 'number',

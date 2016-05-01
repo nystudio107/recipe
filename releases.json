@@ -1,5 +1,15 @@
 [
     {
+        "version": "1.0.1",
+        "downloadUrl": "https://github.com/nystudio107/recipe/archive/master.zip",
+        "date": "2016-05-01T05:00:00.637Z",
+        "notes": [
+            "[Fixed] Fixed a minor issue with Recipe if it was embedded in a Matrix field",
+            "[Added] Added the 'Skill Level' field",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
         "version": "1.0.0",
         "downloadUrl": "https://github.com/nystudio107/recipe/archive/master.zip",
         "date": "2016-05-01T02:56:00.637Z",
