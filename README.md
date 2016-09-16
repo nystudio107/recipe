@@ -121,6 +121,11 @@ Some things to do, and ideas for potential features:
 
 ## Recipe Changelog
 
+### 1.0.2 -- 2016.09.16
+
+* [Fixed] Handle empty ingredients lists without erroring
+* [Improved] Updated the README.md
+
 ### 1.0.1 -- 2016.05.01
 
 * [Fixed] Fixed a minor issue with Recipe if it was embedded in a Matrix field

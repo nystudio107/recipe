@@ -72,6 +72,8 @@ class RecipeModel extends BaseModel
     public function getIngredients($outputUnits="imperial", $serving=0)
     {
         $result = array();
+        if (empty($this->ingredients))
+            return result;
         foreach ($this->ingredients as $row)
         {
             $convertedUnits = "";
