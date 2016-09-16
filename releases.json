@@ -5,6 +5,7 @@
         "date": "2016-09-16T05:00:00.637Z",
         "notes": [
             "[Fixed] Handle empty ingredients lists without erroring",
+            "[Fixed] Handle empty directions without erroring",
             "[Improved] Updated the README.md"
         ]
     },

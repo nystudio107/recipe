@@ -124,6 +124,7 @@ Some things to do, and ideas for potential features:
 ### 1.0.2 -- 2016.09.16
 
 * [Fixed] Handle empty ingredients lists without erroring
+* [Fixed] Handle empty directions without erroring
 * [Improved] Updated the README.md
 
 ### 1.0.1 -- 2016.05.01
