@@ -184,6 +184,8 @@ class RecipeModel extends BaseModel
     public function getDirections()
     {
         $result = array();
+        if (empty($this->directions))
+            return $result;
         foreach ($this->directions as $row)
         {
             $direction = $row['direction'];
