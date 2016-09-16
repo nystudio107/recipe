@@ -73,7 +73,7 @@ class RecipeModel extends BaseModel
     {
         $result = array();
         if (empty($this->ingredients))
-            return result;
+            return $result;
         foreach ($this->ingredients as $row)
         {
             $convertedUnits = "";
