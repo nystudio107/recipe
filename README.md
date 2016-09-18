@@ -121,7 +121,7 @@ Some things to do, and ideas for potential features:
 
 ## Recipe Changelog
 
-### 1.0.2 -- 2016.09.16
+### 1.0.2 -- 2016.09.18
 
 * [Fixed] Handle empty ingredients lists without erroring
 * [Fixed] Handle empty directions without erroring
