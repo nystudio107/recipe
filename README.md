@@ -121,6 +121,11 @@ Some things to do, and ideas for potential features:
 
 ## Recipe Changelog
 
+### 1.0.3 -- 2017.01.05
+
+* [Added] Added support for 1/3, 2/3, and 1/6 fractions
+* [Improved] Updated the README.md
+
 ### 1.0.2 -- 2016.09.18
 
 * [Fixed] Handle empty ingredients lists without erroring
