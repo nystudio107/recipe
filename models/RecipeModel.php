@@ -329,7 +329,7 @@ class RecipeModel extends BaseModel
     {
         $result = "";
         $whole = floor($quantity);
-        $fraction = $quantity - $whole;
+        $fraction = bcdiv($quantity - $whole, 1, 2);
         switch ($fraction)
         {
             case 0:
@@ -340,8 +340,16 @@ class RecipeModel extends BaseModel
                 $fraction = " &frac14;";
             break;
 
+            case 0.33:
+                $fraction = " &#x2153;";
+            break;
+
             case 0.5:
                 $fraction = " &frac12;";
+            break;
+
+            case 0.66:
+                $fraction = " &#x2154;";
             break;
 
             case 0.75:
