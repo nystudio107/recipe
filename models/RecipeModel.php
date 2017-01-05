@@ -336,6 +336,10 @@ class RecipeModel extends BaseModel
                 $fraction = "";
             break;
 
+            case 0.16:
+                $fraction = " &#x2159;";
+            break;
+
             case 0.25:
                 $fraction = " &frac14;";
             break;
