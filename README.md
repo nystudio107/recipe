@@ -2,6 +2,8 @@
 
 A recipe FieldType for Craft CMS that includes microdata support
 
+Related: [Recipe for Craft 3.x](https://github.com/nystudio107/craft3-recipe)
+
 ![Screenshot](resources/screenshots/recipe01.png)
 
 ## Installation
